@@ -17,9 +17,9 @@
 
 **Simple ML** is a personal collection of machine-learning experiments focused on learning by building.
 
-The notebooks cover supervised learning, unsupervised learning, NLP, preprocessing, model evaluation, visualization, and basic model comparison. The goal is to build a strong ML foundation while continuously improving earlier models as new techniques are learned.
+The notebooks cover supervised learning, unsupervised learning, NLP, image classification, preprocessing, model evaluation, visualization, and model comparison. The goal is to build a strong ML foundation while continuously improving earlier models as new techniques are learned.
 
-Most projects are designed to be explored and run locally through **Jupyter Notebook**.
+Most projects are designed to be explored through **Jupyter Notebook**, with some notebooks originally developed in Google Colab or Kaggle. Each notebook records an experiment that can be revisited as new techniques are learned.
 
 ## Projects
 
@@ -31,11 +31,13 @@ Most projects are designed to be explored and run locally through **Jupyter Note
 | [`Forest_Fire.ipynb`](Forest_Fire.ipynb) | Forest-fire classification with models such as **Logistic Regression** and **SVC** |
 | [`Heart_Failure.ipynb`](Heart_Failure.ipynb) | Heart-failure prediction, preprocessing and classification evaluation |
 | [`Houses.ipynb`](Houses.ipynb) | House-price prediction using **Linear Regression** |
+| [`Movie_review_sentiment.ipynb`](Movie_review_sentiment.ipynb) | IMDB sentiment classification using **TF-IDF**, **Logistic Regression**, **LinearSVC** and **Random Forest**, with misclassified-review inspection and model export |
 | [`Songlikes.ipynb`](Songlikes.ipynb) | Song-like classification using **Logistic Regression** |
 | [`Spam_sms.ipynb`](Spam_sms.ipynb) | SMS spam detection using **TF-IDF** and multiple classification models |
 | [`Spam_sms_sim.ipynb`](Spam_sms_sim.ipynb) | A simpler SMS spam classifier using **CountVectorizer + Multinomial Naive Bayes** |
 | [`Stocks.ipynb`](Stocks.ipynb) | Stock-data analysis and regression experiments |
 | [`Student_Placements.ipynb`](Student_Placements.ipynb) | Student placement classification using **Logistic Regression** |
+| [`imageclassification.ipynb`](imageclassification.ipynb) | CIFAR-10 study comparing a baseline **TensorFlow/Keras CNN** with **data augmentation**, including training curves, per-class metrics, error-case inspection and paired-seed experiment code |
 
 ## Tech Stack
 
@@ -49,6 +51,8 @@ Most projects are designed to be explored and run locally through **Jupyter Note
 - spaCy
 - NLTK
 - XGBoost
+- TensorFlow / Keras
+- joblib
 
 ## Running Locally
 
@@ -78,10 +82,10 @@ source .venv/bin/activate
 ### 3. Install the common dependencies
 
 ```bash
-pip install jupyter numpy pandas matplotlib seaborn scikit-learn spacy nltk xgboost
+pip install jupyter numpy pandas matplotlib seaborn scikit-learn spacy nltk xgboost joblib
 ```
 
-Some notebooks may require additional packages depending on the experiment.
+For `imageclassification.ipynb`, also install TensorFlow with `pip install tensorflow`. A GPU can reduce training time, especially for the repeated CNN experiments. Some notebooks may require additional packages or NLTK resources depending on the experiment.
 
 ### 4. Start Jupyter
 
@@ -89,10 +93,10 @@ Some notebooks may require additional packages depending on the experiment.
 jupyter notebook
 ```
 
-Open the notebook you want to explore and run the cells in order.
+Open the notebook you want to explore, select the Python environment containing the dependencies, and run the cells in order. Review dataset inputs and output paths before starting training.
 
-> **Note:** Some notebooks were originally written with Colab-style paths such as `/content/...`.  
-> When running locally, place the required dataset on your machine and update the `read_csv()` / file path in the notebook accordingly.
+> **Note:** Some notebooks use Colab-style dataset paths such as `/content/...`, while the CNN study saves checkpoints and reports under `/kaggle/working/...`.  
+> Dataset files are not bundled in this repository. Supply the CSV/TSV files expected by your chosen notebook and update its input paths. The CNN notebook downloads CIFAR-10 through Keras and requires internet access on the first run. When running locally, replace Kaggle output paths with a writable local directory and create it before saving files.
 
 ## Typical Workflow
 
@@ -121,11 +125,11 @@ Prediction / Experimentation
 This repository is primarily a learning space for:
 
 - understanding ML algorithms by implementing them
-- comparing different models
+- comparing different models and studying the effect of data augmentation
 - practicing preprocessing and feature engineering
 - working with real datasets
-- learning evaluation metrics
-- experimenting with NLP and clustering
+- learning evaluation metrics, inspecting errors and tracking training time
+- experimenting with NLP, clustering and CNN-based image classification
 - gradually improving models and notebooks over time
 
 ## License
